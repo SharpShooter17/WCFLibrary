@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -30,9 +31,10 @@ namespace Client
                     Console.WriteLine("Book is not available!");
                 }
             }
-              
+
+            BorrowedItem[] borrowedItems = libraryClient.ListOfBorrowedItems();
             Console.WriteLine("Borrowed items:");
-            foreach(BorrowedItem item in libraryClient.ListOfBorrowedItems())
+            foreach(BorrowedItem item in borrowedItems)
             {
                 Console.WriteLine("Borrowed by: " + item.UserId + ", Book Id:" + item.Book.Id + ", Title: " + item.Book.Title + ", borrow date: " + item.BorrowDate + ", retun date: " + item.ReturnDate);
             }
@@ -42,6 +44,13 @@ namespace Client
             foreach(Book b in libraryClient.GetBorrowedBooks(userId))
             {
                 Console.WriteLine("Title: " + b.Title + ", Id: " + b.Id);
+            }
+
+            try { 
+                libraryClient.BookInfo(11);
+            } catch (FaultException<NoSuchBookException> ex )
+            {
+                Console.WriteLine(ex.Detail.Message);
             }
 
             Console.ReadKey();

@@ -17,6 +17,7 @@ namespace LibraryService
         List<Book> GetBorrowedBooks(int userId);
 
         [OperationContract]
+        [FaultContract(typeof(Exceptions.NoSuchBookException))]
         Book BookInfo(int bookId);
 
         [OperationContract]

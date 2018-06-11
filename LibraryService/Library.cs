@@ -24,7 +24,7 @@ namespace LibraryService
                 }
             }
 
-            throw new Exceptions.NoSuchBookException();
+            throw new FaultException<Exceptions.NoSuchBookException>(new Exceptions.NoSuchBookException("No such book!"));
         }
 
         [OperationBehavior]

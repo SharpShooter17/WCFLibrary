@@ -1,15 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.Serialization;
+using System.ServiceModel;
 
 namespace LibraryService.Exceptions
 {
-    public class NoSuchBookException : Exception
+    [DataContract]
+    public class NoSuchBookException
     {
-        public NoSuchBookException() : base("No such book in library.")
+        [DataMember]
+        String _message;
+
+        [DataMember]
+        public string Message { get => _message; set => _message = value; }
+
+        public NoSuchBookException(String message)
         {
+            this._message = message;
         }
     }
 }
+

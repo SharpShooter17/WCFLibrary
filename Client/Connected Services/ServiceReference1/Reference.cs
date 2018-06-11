@@ -167,6 +167,67 @@ namespace Client.ServiceReference1 {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="NoSuchBookException", Namespace="http://schemas.datacontract.org/2004/07/LibraryService.Exceptions")]
+    [System.SerializableAttribute()]
+    public partial class NoSuchBookException : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MessageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string _messageField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Message {
+            get {
+                return this.MessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
+                    this.MessageField = value;
+                    this.RaisePropertyChanged("Message");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string _message {
+            get {
+                return this._messageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this._messageField, value) != true)) {
+                    this._messageField = value;
+                    this.RaisePropertyChanged("_message");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.ILibrary")]
     public interface ILibrary {
@@ -184,6 +245,7 @@ namespace Client.ServiceReference1 {
         System.Threading.Tasks.Task<Client.ServiceReference1.Book[]> GetBorrowedBooksAsync(int userId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILibrary/BookInfo", ReplyAction="http://tempuri.org/ILibrary/BookInfoResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(Client.ServiceReference1.NoSuchBookException), Action="http://tempuri.org/ILibrary/BookInfoNoSuchBookExceptionFault", Name="NoSuchBookException", Namespace="http://schemas.datacontract.org/2004/07/LibraryService.Exceptions")]
         Client.ServiceReference1.Book BookInfo(int bookId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ILibrary/BookInfo", ReplyAction="http://tempuri.org/ILibrary/BookInfoResponse")]

@@ -5,6 +5,7 @@
       <xsd:import namespace="http://tempuri.org/" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/LibraryService" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/LibraryService.Exceptions" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="ILibrary_ListOfBorrowedItems_InputMessage">
@@ -25,6 +26,9 @@
   <wsdl:message name="ILibrary_BookInfo_OutputMessage">
     <wsdl:part name="parameters" element="tns:BookInfoResponse" />
   </wsdl:message>
+  <wsdl:message name="ILibrary_BookInfo_NoSuchBookExceptionFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/LibraryService.Exceptions" name="detail" element="q1:NoSuchBookException" />
+  </wsdl:message>
   <wsdl:message name="ILibrary_BorrowBook_InputMessage">
     <wsdl:part name="parameters" element="tns:BorrowBook" />
   </wsdl:message>
@@ -43,6 +47,7 @@
     <wsdl:operation name="BookInfo">
       <wsdl:input wsaw:Action="http://tempuri.org/ILibrary/BookInfo" message="tns:ILibrary_BookInfo_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ILibrary/BookInfoResponse" message="tns:ILibrary_BookInfo_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/ILibrary/BookInfoNoSuchBookExceptionFault" name="NoSuchBookExceptionFault" message="tns:ILibrary_BookInfo_NoSuchBookExceptionFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="BorrowBook">
       <wsdl:input wsaw:Action="http://tempuri.org/ILibrary/BorrowBook" message="tns:ILibrary_BorrowBook_InputMessage" />
@@ -77,6 +82,9 @@
       <wsdl:output>
         <soap:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="NoSuchBookExceptionFault">
+        <soap:fault use="literal" name="NoSuchBookExceptionFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="BorrowBook">
       <soap:operation soapAction="http://tempuri.org/ILibrary/BorrowBook" style="document" />
